@@ -1,32 +1,35 @@
 "use client";
-import { useState } from 'react';
-import { CldUploadButton } from 'next-cloudinary';
-import { CldImage } from 'next-cloudinary';
-import { CloudinaryUploadWidgetResults, CloudinaryUploadWidgetInfo } from 'next-cloudinary';
+
+import { CldImage } from "next-cloudinary";
+import { CldUploadButton } from "next-cloudinary";
+import { useState } from "react";
+
+export type UploadResult = {
+  info: {
+    public_id: string;
+  };
+  event: "success";
+};
 
 export default function Home() {
   const [imageId, setImageId] = useState("");
 
-  const handleUpload = (results: CloudinaryUploadWidgetResults) => {
-    const info = results.info as CloudinaryUploadWidgetInfo;
-    if (results.event === 'success' && info.public_id) {
-      setImageId(info.public_id);
-    } else {
-      console.error("Upload failed or no public_id found.");
-    }
-  };
-
   return (
-    <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <CldUploadButton
-        onUpload={handleUpload}
-        uploadPreset='bhvdva9u'
+        onSuccess={(results: any) => {
+          if (results.event === "success") {
+            setImageId(results.info.public_id);
+          }
+        }}
+        uploadPreset="bhvdva9u"
       />
+
       {imageId && (
         <CldImage
-          width="400"
+          width="500"
           height="300"
-          src={imageId} // Use the dynamic imageId here
+          src={imageId}
           sizes="100vw"
           alt="Description of my image"
         />
@@ -34,3 +37,7 @@ export default function Home() {
     </main>
   );
 }
+
+
+
+
