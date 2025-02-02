@@ -9,7 +9,7 @@ export default async function FavouritesPage() {
     .expression("resource_type:image AND tags=favourite")
     .sort_by("created_at","desc")
     .with_field("tags")
-    .max_results(20)
+    .max_results(30)
     .execute()) as{resources :SearchResult[]};
 
 

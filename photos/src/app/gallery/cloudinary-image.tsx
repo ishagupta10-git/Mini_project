@@ -10,7 +10,7 @@ import { FullHeart } from "@/components/ui/icons/full-heart";
 export function CloudinaryImage (props: any & {imageData: SearchResult; path: string}){
     const [transiton, startTransition] = useTransition()
     const {imageData} = props
-    const isFavourited = imageData.tags.includes('favourite')
+    const isFavourited = imageData.tags.includes('favourite');
 
 
     return (
