@@ -46,7 +46,7 @@ export function CloudinaryImage (props:{ imagedata: SearchResult; onUnheart?: (u
             
         }
 
-          <ImageMenu/>  
+          <ImageMenu image={imagedata} />  
         </div>
     );
         
