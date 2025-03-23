@@ -4,9 +4,9 @@ import cloudinary from "cloudinary";
 import GalleryGrid from "./gallery-grid";
 
 export type SearchResult ={
-  public_id: string
-  tags: string[]
-}
+  public_id: string;
+  tags: string[];
+};
 
 export default async function GalleryPage() {
 
@@ -14,21 +14,20 @@ export default async function GalleryPage() {
     .expression("resource_type:image")
     .sort_by("created_at","desc")
     .with_field("tags")
-    .max_results(20)
-    .execute()) as{resources :SearchResult[]};
+    .max_results(30)
+    .execute()) as{ resources: SearchResult[]};
 
-  console.log("results", results)
+  // console.log("results", results)
 
-  const MAX_COLUMNS = 4;
+  // const MAX_COLUMNS = 4;
 
 
-  function getColumns(colIndex: number){
-    return results.resources.filter((resource, idx) => 
-       idx % MAX_COLUMNS === colIndex
-    )
+  // function getColumns(colIndex: number){
+  //   return results.resources.filter((resource, idx) => 
+  //      idx % MAX_COLUMNS === colIndex
+  //   )
 
-  }
-
+  // }
 
   return (
     <section>
@@ -41,8 +40,6 @@ export default async function GalleryPage() {
       <GalleryGrid
       images={results.resources}
       />
-
-        
       </div>
     </section>
   );
